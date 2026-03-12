@@ -338,13 +338,14 @@ export default function Dashboard() {
                     </div>
                   ) : (
                     <div>
-                      <div className="glass-card p-6 max-w-xs mx-auto mb-6">
+                       <div className="glass-card p-6 max-w-xs mx-auto mb-6">
                         <p className="text-sm font-medium text-foreground mb-3">Scan QR or Pay via UPI</p>
-                        <div className="w-44 h-44 bg-muted/30 rounded-xl mx-auto flex items-center justify-center border-2 border-dashed border-border">
-                          <span className="text-muted-foreground text-sm">UPI QR Code</span>
+                        <div className="w-44 h-44 bg-muted/30 rounded-xl mx-auto flex items-center justify-center border-2 border-dashed border-border overflow-hidden">
+                          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=yagya@unitypay&pn=TaskEarn&am=1000&cu=INR" alt="UPI QR Code" className="w-full h-full object-cover rounded-xl" />
                         </div>
                         <div className="mt-3 bg-primary/10 rounded-lg p-2">
                           <p className="text-lg font-bold text-primary">₹1,000</p>
+                          <p className="text-sm text-muted-foreground">UPI ID: yagya@unitypay</p>
                         </div>
                       </div>
                       <label className="cursor-pointer inline-block">
