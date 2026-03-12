@@ -68,7 +68,7 @@ export default function Dashboard() {
     if (p) setProfile(p as any);
 
     const { data: t } = await supabase.from('tasks').select('*').eq('user_id', user!.id).order('task_number');
-    if (t && t.length > 0) setTasks(t as any);
+    setTasks((t && t.length > 0) ? (t as any) : []);
 
     const { data: dep } = await supabase.from('deposits').select('status').eq('user_id', user!.id).eq('status', 'pending');
     setDepositPending((dep && dep.length > 0) || false);
