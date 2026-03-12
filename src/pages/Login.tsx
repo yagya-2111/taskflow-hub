@@ -33,8 +33,7 @@ export default function Login() {
     <div className="min-h-screen gradient-hero flex items-center justify-center px-4">
       <div className="glass-card w-full max-w-md p-8 animate-fade-in-up">
         <div className="text-center mb-8">
-          <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mx-auto mb-4">
-            <Zap className="w-7 h-7 text-primary-foreground" />
+          <img src={logoImg} alt="TaskEarn" className="h-16 w-auto mx-auto mb-4" />
           </div>
           <h1 className="text-2xl font-bold text-foreground">Welcome Back</h1>
           <p className="text-muted-foreground mt-1">Login to your TaskEarn account</p>
