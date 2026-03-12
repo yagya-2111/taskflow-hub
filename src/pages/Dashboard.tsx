@@ -104,6 +104,10 @@ export default function Dashboard() {
 
   const createTasks = async () => {
     if (!user) return;
+    // Double-check DB to prevent duplicates
+    const { data: existing } = await supabase.from('tasks').select('id').eq('user_id', user.id);
+    if (existing && existing.length > 0) return;
+
     const taskInserts = TASK_TEMPLATES.map((t, i) => ({
       user_id: user.id, task_number: i + 1, task_type: t.type,
       task_data: { title: t.title, description: t.desc },
@@ -115,8 +119,8 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    if (profile?.deposit_approved && tasks.length === 0) createTasks();
-  }, [profile?.deposit_approved]);
+    if (profile?.deposit_approved && tasks.length === 0 && !loading) createTasks();
+  }, [profile?.deposit_approved, loading]);
 
   const completeTask = async (taskId: string) => {
     const { error } = await supabase.from('tasks').update({
