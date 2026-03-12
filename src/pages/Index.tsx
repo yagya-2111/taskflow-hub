@@ -5,7 +5,7 @@ import StatsSection from '@/components/home/StatsSection';
 import StepsSection from '@/components/home/StepsSection';
 import TestimonialsSection from '@/components/home/TestimonialsSection';
 import FAQSection from '@/components/home/FAQSection';
-import { Zap } from 'lucide-react';
+import logo from '@/assets/logo.png';
 
 export default function Index() {
   return (

@@ -1,7 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
-import { LogOut, Menu, X, Zap } from 'lucide-react';
+import { LogOut, Menu, X } from 'lucide-react';
+import logo from '@/assets/logo.png';
 import { useState } from 'react';
 
 export default function Navbar() {
