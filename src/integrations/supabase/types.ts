@@ -14,16 +14,207 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      deposits: {
+        Row: {
+          amount: number
+          created_at: string | null
+          id: string
+          is_manual: boolean | null
+          screenshot_url: string | null
+          status: string | null
+          user_id: string
+        }
+        Insert: {
+          amount?: number
+          created_at?: string | null
+          id?: string
+          is_manual?: boolean | null
+          screenshot_url?: string | null
+          status?: string | null
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          id?: string
+          is_manual?: boolean | null
+          screenshot_url?: string | null
+          status?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          available_balance: number | null
+          created_at: string | null
+          deposit_amount: number | null
+          deposit_approved: boolean | null
+          email: string | null
+          id: string
+          referral_code: string | null
+          referred_by: string | null
+          tasks_completed: number | null
+          total_earnings: number | null
+          updated_at: string | null
+          user_id: string
+          withdrawal_unlocked: boolean | null
+        }
+        Insert: {
+          available_balance?: number | null
+          created_at?: string | null
+          deposit_amount?: number | null
+          deposit_approved?: boolean | null
+          email?: string | null
+          id?: string
+          referral_code?: string | null
+          referred_by?: string | null
+          tasks_completed?: number | null
+          total_earnings?: number | null
+          updated_at?: string | null
+          user_id: string
+          withdrawal_unlocked?: boolean | null
+        }
+        Update: {
+          available_balance?: number | null
+          created_at?: string | null
+          deposit_amount?: number | null
+          deposit_approved?: boolean | null
+          email?: string | null
+          id?: string
+          referral_code?: string | null
+          referred_by?: string | null
+          tasks_completed?: number | null
+          total_earnings?: number | null
+          updated_at?: string | null
+          user_id?: string
+          withdrawal_unlocked?: boolean | null
+        }
+        Relationships: []
+      }
+      referrals: {
+        Row: {
+          created_at: string | null
+          deposit_completed: boolean | null
+          id: string
+          referred_user_id: string
+          referrer_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          deposit_completed?: boolean | null
+          id?: string
+          referred_user_id: string
+          referrer_id: string
+        }
+        Update: {
+          created_at?: string | null
+          deposit_completed?: boolean | null
+          id?: string
+          referred_user_id?: string
+          referrer_id?: string
+        }
+        Relationships: []
+      }
+      tasks: {
+        Row: {
+          completed_at: string | null
+          created_at: string | null
+          id: string
+          reward: number | null
+          status: string | null
+          task_data: Json | null
+          task_number: number
+          task_type: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          reward?: number | null
+          status?: string | null
+          task_data?: Json | null
+          task_number: number
+          task_type: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          reward?: number | null
+          status?: string | null
+          task_data?: Json | null
+          task_number?: number
+          task_type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      withdrawals: {
+        Row: {
+          amount: number
+          created_at: string | null
+          id: string
+          is_manual: boolean | null
+          status: string | null
+          upi_id: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string | null
+          id?: string
+          is_manual?: boolean | null
+          status?: string | null
+          upi_id: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string | null
+          id?: string
+          is_manual?: boolean | null
+          status?: string | null
+          upi_id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +341,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
