@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX IF NOT EXISTS idx_tasks_user_task_number ON tasks (user_id, task_number);
