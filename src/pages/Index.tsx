@@ -6,10 +6,15 @@ import StepsSection from '@/components/home/StepsSection';
 import TestimonialsSection from '@/components/home/TestimonialsSection';
 import FAQSection from '@/components/home/FAQSection';
 import logo from '@/assets/logo.png';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Index() {
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
       <TrustSection />
@@ -17,11 +22,29 @@ export default function Index() {
       <StepsSection />
       <TestimonialsSection />
       <FAQSection />
-      <footer className="py-8 bg-secondary/50 text-center">
-        <div className="flex items-center justify-center gap-2 mb-2">
-          <img src={logo} alt="TaskEarn" className="h-10 w-auto" />
+
+      {/* CTA Section */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 grid-pattern opacity-20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5" />
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">Ready to Start Earning?</h2>
+          <p className="text-lg text-muted-foreground mb-8 max-w-md mx-auto">Join 15,000+ users who are already earning with TaskEarn</p>
+          <Button size="lg" className="gradient-primary text-primary-foreground glow-primary text-lg px-10 py-6 rounded-xl group" onClick={() => navigate('/signup')}>
+            Create Free Account <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </Button>
         </div>
-        <p className="text-sm text-muted-foreground">© 2026 TaskEarn. All rights reserved.</p>
+      </section>
+
+      <footer className="py-12 border-t border-border/30">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <img src={logo} alt="TaskEarn" className="h-8 w-auto" />
+            </div>
+            <p className="text-sm text-muted-foreground">© 2026 TaskEarn. All rights reserved. India's most trusted earning platform.</p>
+          </div>
+        </div>
       </footer>
     </div>
   );
