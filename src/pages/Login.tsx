@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
-import { Zap, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
+import logoImg from '@/assets/logo.png';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -32,9 +33,7 @@ export default function Login() {
     <div className="min-h-screen gradient-hero flex items-center justify-center px-4">
       <div className="glass-card w-full max-w-md p-8 animate-fade-in-up">
         <div className="text-center mb-8">
-          <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mx-auto mb-4">
-            <Zap className="w-7 h-7 text-primary-foreground" />
-          </div>
+          <img src={logoImg} alt="TaskEarn" className="h-16 w-auto mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-foreground">Welcome Back</h1>
           <p className="text-muted-foreground mt-1">Login to your TaskEarn account</p>
         </div>
