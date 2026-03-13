@@ -28,9 +28,9 @@ export default function Index() {
         <div className="absolute inset-0 grid-pattern opacity-20" />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5" />
         <div className="container mx-auto px-4 relative z-10 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">Ready to Start Earning?</h2>
-          <p className="text-lg text-muted-foreground mb-8 max-w-md mx-auto">Join 15,000+ users who are already earning with TaskEarn</p>
-          <Button size="lg" className="gradient-primary text-primary-foreground glow-primary text-lg px-10 py-6 rounded-xl group" onClick={() => navigate('/signup')}>
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">Ready to Invest ₹500 & Earn ₹700?</h2>
+          <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-md mx-auto px-4">Join 15,000+ users earning with TaskEarn. Complete 5 tasks, withdraw instantly.</p>
+          <Button size="lg" className="gradient-primary text-primary-foreground glow-primary text-base md:text-lg px-8 md:px-10 py-5 md:py-6 rounded-xl group" onClick={() => navigate('/signup')}>
             Create Free Account <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Button>
         </div>
