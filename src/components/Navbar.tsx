@@ -1,14 +1,15 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/lib/auth';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
-import { LogOut, Menu, X, Shield, LayoutDashboard, Users, Home } from 'lucide-react';
+import { LogOut, Menu, X, Shield, LayoutDashboard, Users, Home, Sparkles, ArrowDownToLine } from 'lucide-react';
 import logo from '@/assets/logo.png';
 import { useState, useEffect } from 'react';
 
 export default function Navbar() {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -19,6 +20,22 @@ export default function Navbar() {
       });
     }
   }, [user]);
+
+  const navItems = user ? [
+    { label: 'Home', icon: Home, path: '/' },
+    { label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
+    { label: 'Tasks', icon: Sparkles, path: '/dashboard?tab=tasks' },
+    { label: 'Referrals', icon: Users, path: '/dashboard?tab=referrals' },
+    { label: 'Withdraw', icon: ArrowDownToLine, path: '/dashboard?tab=withdraw' },
+  ] : [];
+
+  const isActive = (path: string) => {
+    if (path.includes('?tab=')) {
+      const tab = path.split('tab=')[1];
+      return location.search.includes(`tab=${tab}`);
+    }
+    return location.pathname === path && !location.search.includes('tab=');
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/30" style={{ background: 'rgba(10, 12, 20, 0.85)', backdropFilter: 'blur(20px)' }}>
@@ -31,15 +48,17 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-1">
           {user ? (
             <>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="gap-1.5 text-muted-foreground hover:text-foreground">
-                <Home className="w-4 h-4" /> Home
-              </Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/dashboard')} className="gap-1.5 text-muted-foreground hover:text-foreground">
-                <LayoutDashboard className="w-4 h-4" /> Dashboard
-              </Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/referrals')} className="gap-1.5 text-muted-foreground hover:text-foreground">
-                <Users className="w-4 h-4" /> Referrals
-              </Button>
+              {navItems.map(item => (
+                <Button
+                  key={item.label}
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => navigate(item.path)}
+                  className={`gap-1.5 ${isActive(item.path) ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground'}`}
+                >
+                  <item.icon className="w-4 h-4" /> {item.label}
+                </Button>
+              ))}
               {isAdmin && (
                 <Button variant="ghost" size="sm" onClick={() => navigate('/admin')} className="gap-1.5 text-accent hover:text-accent">
                   <Shield className="w-4 h-4" /> Admin
@@ -60,24 +79,25 @@ export default function Navbar() {
           )}
         </div>
 
-        <button className="md:hidden text-foreground p-2" onClick={() => setMobileOpen(!mobileOpen)}>
+        <button className="md:hidden text-foreground p-2" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
           {mobileOpen ? <X /> : <Menu />}
         </button>
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden border-t border-border/30 p-4 flex flex-col gap-1 animate-slide-up" style={{ background: 'rgba(10, 12, 20, 0.95)' }}>
+        <div className="md:hidden border-t border-border/30 p-4 flex flex-col gap-1 animate-fade-in" style={{ background: 'rgba(10, 12, 20, 0.95)' }}>
           {user ? (
             <>
-              <Button variant="ghost" className="justify-start gap-2" onClick={() => { navigate('/'); setMobileOpen(false); }}>
-                <Home className="w-4 h-4" /> Home
-              </Button>
-              <Button variant="ghost" className="justify-start gap-2" onClick={() => { navigate('/dashboard'); setMobileOpen(false); }}>
-                <LayoutDashboard className="w-4 h-4" /> Dashboard
-              </Button>
-              <Button variant="ghost" className="justify-start gap-2" onClick={() => { navigate('/referrals'); setMobileOpen(false); }}>
-                <Users className="w-4 h-4" /> Referrals
-              </Button>
+              {navItems.map(item => (
+                <Button
+                  key={item.label}
+                  variant="ghost"
+                  className={`justify-start gap-2 ${isActive(item.path) ? 'text-primary bg-primary/10' : ''}`}
+                  onClick={() => { navigate(item.path); setMobileOpen(false); }}
+                >
+                  <item.icon className="w-4 h-4" /> {item.label}
+                </Button>
+              ))}
               {isAdmin && (
                 <Button variant="ghost" className="justify-start gap-2 text-accent" onClick={() => { navigate('/admin'); setMobileOpen(false); }}>
                   <Shield className="w-4 h-4" /> Admin Panel
